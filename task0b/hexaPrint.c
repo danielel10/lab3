@@ -3,17 +3,33 @@
 #include <string.h>
 
 
+void printHex(char* buffer,int size) {
+    for (int i = 0; i < size; ++i) {
+        printf("%02hhX ",buffer[i]);
+    }
+    printf("\n");
+}
+
+
 int main(int argc, char *argv[]) {
-    FILE *file;
-    file= fopen(*(argv + 1),"rb");
-    char arr[10];
-    if(file == NULL) {
+    FILE *in;
+    in= fopen(*(argv + 1),"rb");
+    if(in == NULL) {
         printf("empty file\n");
         return 0;
     }
-    fread(arr,sizeof (char ),10,file);
-    for (int i = 0; i < n; ++i) {
-        printf("%X ",arr[i]);
-    }
+    fseek(in,0,SEEK_END);
+    int size = ftell(in);
+    char arr[size];
+
+    fseek(in,0,SEEK_SET);
+
+    fread(arr,sizeof (char ),size,in);
+    printHex(arr,size);
+
+    fclose(in);
+
+    return 0;
+
 
 }
