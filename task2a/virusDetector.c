@@ -19,7 +19,7 @@ struct link {
 void printHex(unsigned char* buffer,int size) {
     for (int i = 0; i < size; ++i) {
         printf("%02hhX ",buffer[i]);
-        if( i % 22 == 0 && i != 0)
+        if( i % 16 == 0 && i != 0)
             printf("\n");
     }
     printf("\n");
@@ -128,14 +128,18 @@ void detect_virus(char *buffer, unsigned int size, link *virus_list) {
 
 void kill_virus(char *fileName, int signatureOffset, int signatureSize) {
     FILE *in;
-    in= fopen(fileName,"wb");
+    in= fopen(fileName,"rb+");
     if(in == NULL) {
         printf("no file");
         exit(0);
     }
     unsigned char fix[signatureSize];
+    for (int i = 0; i < signatureSize; ++i) {
+        fix[i] = 0x90;
+    }
     fseek(in,signatureOffset,SEEK_SET);
     fwrite(fix, sizeof(unsigned char ),signatureSize,in);
+    fclose(in);
 }
 
 
