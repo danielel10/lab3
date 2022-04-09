@@ -55,16 +55,6 @@ int main(int argc, char *argv[]) {
         free(virus1.sig);
     }
 
-
-
-
-
-//    char arr[size];
-//
-//
-//    fread(arr,sizeof (char ),size,in);
-//    printHex(arr,size);
-
     fclose(in);
 
     return 0;
