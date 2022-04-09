@@ -102,11 +102,11 @@ void detect_virus(char *buffer, unsigned int size, link *virus_list) {
     virus *head = virus_list->vir;
     unsigned short i = 0;
     while (head != NULL) {
-        while (i <= size) {
+        while (i <= size && head != NULL) {
             if (memcmp((buffer + i),head->sig,head->SigSize) == 0) {
                 printf("Byte location: %d\n", i);
                 printf("Virus name: %s\n", head->virusName);
-                printf("Virus signature size: %d\n", head->SigSize);
+                printf("Virus signature size: %d\n\n", head->SigSize);
                 virus_list = (link *) virus_list->nextVirus;
                 head = virus_list->vir;
                 i = 0;
