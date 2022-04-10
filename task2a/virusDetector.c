@@ -68,6 +68,8 @@ void list_free(link *virus_list) {
         free(head);
         free(virus_list);
     }
+    else
+        free(virus_list);
 }
 
 link *Load_signature(link *virus_list) {
@@ -175,7 +177,7 @@ int main(int argc, char *argv[]) {
                 break;
             }
             case 3: {
-                char buffer[10000];
+                char buffer[10000] = {};
                 char messege[256];
                 scanf("%s",messege);
                 FILE *in;
